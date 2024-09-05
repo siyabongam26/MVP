@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - All Things Marketing</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome CSS -->
+    <style>
+        /* General Styles */
+        body {
+            background-image: url('images/marketing.jpg'); /* Same background image as homepage */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo img {
+            height: 50px; /* Adjust as needed */
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: #ddd;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box input {
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        .search-box button {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        main {
+            padding: 100px 20px; /* Extra top padding for fixed header */
+        }
+
+        section#services {
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for section */
+            padding: 40px 20px;
+            border-radius: 10px;
+        }
+
+        section#services h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        section#services .service {
+            margin-bottom: 20px;
+        }
+
+        section#services h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        section#services p {
+            font-size: 1.2em;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            color: #fff;
+            text-align: center;
+            padding: 15px 20px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        footer .social-icons {
+            margin-top: 10px;
+        }
+
+        footer .social-icons a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        footer .social-icons a:hover {
+            color: #ddd;
+        }
+
+        /* Chat Box Styles */
+        #chat-box {
+            display: none;
+            background-color: #fff;
+            border: none;
+            border-radius: 15px;
+            width: 320px;
+            max-height: 450px;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            transform: translateY(20px);
+            opacity: 0;
+            z-index: 1000;
+        }
+
+        #chat-box.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        #chat-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 15px 15px 0 0;
+        }
+
+        #close-chat {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #chat-messages {
+            padding: 15px;
+            flex-grow: 1;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        #chat-form {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+            background-color: #f1f1f1;
+            border-radius: 0 0 15px 15px;
+        }
+
+        #chat-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+
+        #chat-form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        #chat-form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="All Things Marketing Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="search-box">
+            <input type="text" placeholder="Search...">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+
+    <main>
+        <section id="services">
+            <h2>Our Services</h2>
+            <p>At All Things Marketing, we offer a range of comprehensive services designed to help your business thrive in the digital landscape. From boosting your online presence to creating compelling content, our team of experts is here to support you every step of the way.</p>
+            
+            <div class="service">
+                <h3>Social Media Management</h3>
+                <p>We handle your social media accounts to increase engagement and build your brand. Our team will craft and schedule posts, manage interactions, and analyze performance metrics to ensure your social media presence is both dynamic and effective.</p>
+            </div>
+            
+            <div class="service">
+                <h3>Content Creation</h3>
+                <p>Our team creates high-quality content that resonates with your target audience. Whether it's blog posts, videos, infographics, or social media updates, we ensure that every piece of content is crafted to align with your brand voice and engage your audience.</p>
+            </div>
+            
+            <div class="service">
+                <h3>SEO Optimization</h3>
+                <p>Improve your search engine rankings and drive more traffic to your website with our SEO services. We conduct thorough keyword research, optimize your website’s on-page elements, and implement effective off-page strategies to boost your visibility and attract more potential customers.</p>
+            </div>
+            
+            <div class="service">
+                <h3>Email Marketing</h3>
+                <p>Effective email campaigns to keep your customers informed and engaged. From designing visually appealing newsletters to segmenting your email lists and analyzing campaign performance, we help you build strong relationships with your audience through targeted and personalized email communication.</p>
+            </div>
+            
+            <div class="service">
+                <h3>Pay-Per-Click Advertising (PPC)</h3>
+                <p>Drive targeted traffic to your website with our PPC advertising services. We create and manage paid search and display ads that effectively target your audience, optimize ad spend, and measure campaign success to ensure you get the best return on investment.</p>
+            </div>
+            
+            <div class="service">
+                <h3>Website Design & Development</h3>
+                <p>Enhance your online presence with a professionally designed and developed website. We offer custom website design and development services that ensure your site is user-friendly, responsive, and optimized for both desktop and mobile devices, providing an exceptional experience for your visitors.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 All Things Marketing. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <!-- Chat Box HTML -->
+    <div id="chat-box">
+        <div id="chat-header">
+            <span>Chat</span>
+            <button id="close-chat">&times;</button>
+        </div>
+        <div id="chat-messages">
+            <!-- Chat messages will appear here -->
+        </div>
+        <div id="chat-form">
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button id="send-message">Send</button>
+        </div>
+    </div>
+    <button id="open-chat">
+        <i class="fas fa-comments"></i> <!-- Chat icon from Font Awesome -->
+    </button>
+
+    <!-- Chat Box JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const openChatButton = document.getElementById('open-chat');
+            const chatBox = document.getElementById('chat-box');
+            const closeChatButton = document.getElementById('close-chat');
+
+            openChatButton.addEventListener('click', () => {
+                chatBox.classList.add('show');
+            });
+
+            closeChatButton.addEventListener('click', () => {
+                chatBox.classList.remove('show');
+            });
+        });
+    </script>
+</body>
+</html>

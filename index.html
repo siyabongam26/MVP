@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="All Things Marketing - Your one-stop solution for all marketing needs.">
+    <meta name="keywords" content="Marketing, SEO, Social Media, Advertising">
+    <title>All Things Marketing</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="chatbox.css"> <!-- Chat Box Styles -->
+    <style>
+        /* General Styles */
+        body {
+            background-image: url('images/marketing.jpg'); /* Background image for the whole page */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: #ddd;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box input {
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        .search-box button {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Main Section */
+        section#home {
+            background-image: url('images/service-background.jpg'); /* Background image for this section */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 100px 20px; /* Extra top padding for fixed header */
+            text-align: center;
+            color: #fff;
+        }
+
+        section#home .text-container {
+            background: rgba(0, 0, 0, 0.5); /* Slightly transparent background */
+            padding: 30px; /* Increased padding */
+            margin: 0 auto;
+            max-width: 800px;
+            border-radius: 10px;
+        }
+
+        section#home h1 {
+            font-size: 3em; /* Larger font size */
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
+            margin: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        section#home p {
+            font-size: 1.5em; /* Larger font size */
+            font-weight: 300; /* Light weight for subtitle */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
+            margin: 10px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        section#home.visible h1, section#home.visible p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            color: #fff;
+            text-align: center;
+            padding: 15px 20px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        footer .button {
+            margin-top: 10px;
+        }
+
+        footer .button a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        footer .button a:hover {
+            color: #ddd;
+        }
+
+        /* Chat Box Styles */
+        #chat-box {
+            display: none;
+            background-color: #fff;
+            border: none;
+            border-radius: 15px;
+            width: 320px;
+            max-height: 450px;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            transform: translateY(20px);
+            opacity: 0;
+            z-index: 1000;
+        }
+
+        #chat-box.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        #chat-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 15px 15px 0 0;
+        }
+
+        #close-chat {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #chat-messages {
+            padding: 15px;
+            flex-grow: 1;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        #chat-form {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+            background-color: #f1f1f1;
+            border-radius: 0 0 15px 15px;
+        }
+
+        #chat-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+
+        #chat-form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        #chat-form button:hover {
+            background-color: #0056b3;
+        }
+
+        #online-status {
+            color: green;
+            font-weight: bold;
+            margin-left: 10px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        /* Chat Icon Styles */
+        #open-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        #open-chat:hover {
+            background-color: #0056b3;
+            box-shadow: 0px 6px 15px rgba(0, 123, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="contact-info">
+                <div class="call">
+                    <i class="fas fa-phone"></i> Call: 011 345 6507
+                </div>
+                <div class="email">
+                    <i class="fas fa-envelope"></i> Email: info@marketing.com
+                </div>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <div class="search-box">
+                <input type="text" placeholder="Search..." aria-label="Search">
+                <button type="submit" aria-label="Search Button"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <section id="home">
+        <div class="text-container">
+            <h1>All Things Marketing</h1>
+            <p>WE DO IT ALL, SO YOU DON'T HAVE TO!</p>
+            <p>Your one-stop solution for all marketing needs.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 All Things Marketing. All rights reserved.</p>
+        <div class="button">
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://instagram.com"target="_blank" aria-label="instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <!-- Chat Box HTML -->
+    <div id="chat-box">
+        <div id="chat-header">
+            <span>Chat</span>
+            <button id="close-chat">&times;</button>
+        </div>
+        <div id="chat-messages">
+            <!-- Chat messages will appear here -->
+        </div>
+        <div id="chat-form">
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button id="send-message">Send</button>
+        </div>
+    </div>
+    <button id="open-chat">
+        <i class="fas fa-comments"></i> <!-- Chat icon from Font Awesome -->
+    </button>
+
+    <!-- Chat Box JavaScript -->
+    <script src="chatbox.js" defer></script>
+    <script>
+        // JavaScript for scroll reveal
+        document.addEventListener('DOMContentLoaded', function() {
+            const section = document.querySelector('#home');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            });
+
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

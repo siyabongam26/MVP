@@ -1,0 +1,109 @@
+/* Chatbox Styles */
+#chat-box {
+  display: none; /* Initially hidden */
+  background-color: #fff; /* White background */
+  border: none; /* Remove border */
+  border-radius: 15px; /* Rounded corners */
+  width: 320px; /* Default width */
+  max-height: 450px; /* Max height */
+  position: fixed;
+  bottom: 80px; /* Space from bottom */
+  right: 20px; /* Space from right */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Shadow */
+  overflow: hidden; /* Hide overflow */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Transitions */
+  transform: translateY(20px); /* Start slightly offscreen */
+  opacity: 0; /* Initially invisible */
+}
+
+#chat-box.show {
+  transform: translateY(0); /* Slide into view */
+  opacity: 1; /* Fully visible */
+}
+
+#chat-header {
+  background-color: #007bff; /* Header color */
+  color: #fff; /* White text */
+  padding: 15px; /* Padding */
+  display: flex;
+  justify-content: space-between; /* Space between header elements */
+  align-items: center;
+  border-radius: 15px 15px 0 0; /* Rounded top corners */
+}
+
+#close-chat {
+  background: none;
+  border: none;
+  color: #fff; /* White text */
+  font-size: 20px; /* Font size */
+  cursor: pointer; /* Pointer cursor */
+}
+
+#chat-messages {
+  padding: 15px; /* Padding */
+  flex-grow: 1;
+  overflow-y: auto; /* Scroll if content overflows */
+  background-color: #f9f9f9; /* Light grey background */
+}
+
+#chat-form {
+  display: flex;
+  padding: 15px; /* Padding */
+  border-top: 1px solid #eee; /* Border */
+  background-color: #f1f1f1; /* Light grey background */
+  border-radius: 0 0 15px 15px; /* Rounded bottom corners */
+}
+
+#chat-input {
+  flex-grow: 1;
+  padding: 10px; /* Padding */
+  border: 1px solid #ccc; /* Border */
+  border-radius: 20px; /* Rounded corners */
+  margin-right: 10px; /* Margin */
+}
+
+#chat-form button {
+  background-color: #007bff; /* Button color */
+  color: #fff; /* White text */
+  border: none;
+  padding: 10px 20px; /* Padding */
+  cursor: pointer; /* Pointer cursor */
+  border-radius: 20px; /* Rounded button */
+  transition: background-color 0.3s ease; /* Hover effect */
+}
+
+#chat-form button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Open chat button styles */
+#open-chat {
+  background-color: #007bff; /* Button color */
+  color: #fff; /* White icon color */
+  border: none;
+  padding: 12px; /* Padding */
+  cursor: pointer; /* Pointer cursor */
+  border-radius: 50%; /* Circular button */
+  box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3); /* Shadow */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition effects */
+}
+
+#open-chat i {
+  font-size: 18px; /* Icon size */
+}
+
+#open-chat:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  box-shadow: 0px 6px 15px rgba(0, 123, 255, 0.5); /* More pronounced shadow */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #chat-box {
+    width: calc(100% - 40px); /* Full width with margins */
+    bottom: 10px; /* Less space from bottom */
+    right: 10px; /* Less space from right */
+  }
+}

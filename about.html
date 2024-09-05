@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - All Things Marketing</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/all.min.css"> <!-- Font Awesome CSS -->
+    <style>
+        /* General Styles */
+        body {
+            background-image: url('images/marketing.jpg'); /* Background image for the whole page */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo img {
+            max-height: 50px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: #ddd;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box input {
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        .search-box button {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* About Section */
+        #about {
+            padding: 100px 20px; /* Extra top padding for fixed header */
+            text-align: center;
+            color: #fff;
+        }
+
+        #about h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        #about p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            color: #fff;
+            text-align: center;
+            padding: 15px 20px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        footer .social-icons {
+            margin-top: 10px;
+        }
+
+        footer .social-icons a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        footer .social-icons a:hover {
+            color: #ddd;
+        }
+
+        /* Chat Box Styles */
+        #chat-box {
+            display: none;
+            background-color: #fff;
+            border: none;
+            border-radius: 15px;
+            width: 320px;
+            max-height: 450px;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            transform: translateY(20px);
+            opacity: 0;
+            z-index: 1000;
+        }
+
+        #chat-box.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        #chat-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 15px 15px 0 0;
+        }
+
+        #close-chat {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #chat-messages {
+            padding: 15px;
+            flex-grow: 1;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        #chat-form {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+            background-color: #f1f1f1;
+            border-radius: 0 0 15px 15px;
+        }
+
+        #chat-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+
+        #chat-form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        #chat-form button:hover {
+            background-color: #0056b3;
+        }
+
+        #online-status {
+            color: green;
+            font-weight: bold;
+            margin-left: 10px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        /* Chat Icon Styles */
+        #open-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        #open-chat:hover {
+            background-color: #0056b3;
+            box-shadow: 0px 6px 15px rgba(0, 123, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="All Things Marketing Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="search-box">
+            <input type="text" placeholder="Search...">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>All Things Marketing was founded with the vision to provide comprehensive marketing solutions to businesses of all sizes. Our mission is to help you achieve your marketing goals with our expertise and dedication.</p>
+        <p>Our team consists of experienced professionals who are passionate about marketing and committed to delivering exceptional results for our clients.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 All Things Marketing. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <!-- Chat Box HTML -->
+    <div id="chat-box">
+        <div id="chat-header">
+            <span>Chat</span>
+            <button id="close-chat">&times;</button>
+        </div>
+        <div id="chat-messages">
+            <!-- Chat messages will appear here -->
+        </div>
+        <div id="chat-form">
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button id="send-message">Send</button>
+        </div>
+    </div>
+    <button id="open-chat">
+        <i class="fas fa-comments"></i> <!-- Chat icon from Font Awesome -->
+    </button>
+
+    <!-- Chat Box JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatBox = document.getElementById('chat-box');
+            const openChatButton = document.getElementById('open-chat');
+            const closeChatButton = document.getElementById('close-chat');
+
+            openChatButton.addEventListener('click', () => {
+                chatBox.classList.toggle('show');
+            });
+
+            closeChatButton.addEventListener('click', () => {
+                chatBox.classList.remove('show');
+            });
+
+            // JavaScript for scroll reveal
+            const section = document.querySelector('#about');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            });
+
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
